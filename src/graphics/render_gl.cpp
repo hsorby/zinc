@@ -1699,6 +1699,7 @@ static int Graphics_object_compile_opengl_vertex_buffer_object(GT_object *object
 
 	ENTER(Graphics_object_compile_opengl_vertex_buffer_object);
 
+printf("enter: Graphics_object_compile_opengl_vertex_buffer_object\n");
 	if (object)
 	{
 		return_code = 1;
@@ -2020,7 +2021,8 @@ static int Graphics_object_compile_opengl_vertex_buffer_object(GT_object *object
 		/* Nothing to do */
 		return_code = 1;
 	}
-	return (return_code);
+printf("leave: Graphics_object_compile_opengl_vertex_buffer_object\n");
+    return (return_code);
 } /* Graphics_object_compile_opengl_vertex_buffer_object */
 
 /***************************************************************************//**
