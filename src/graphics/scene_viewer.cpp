@@ -2013,11 +2013,14 @@ Scene_viewer_render_scene_in_viewport to access this function.
 
 		/* only redraw if the drawing widget has area and neither it nor any of its
 			 parents are unmanaged */
-		do_render=(0<rendering_data.viewport_width) && (0<rendering_data.viewport_height)
+    printf(" --- 4 ---\n");
+        do_render=(0<rendering_data.viewport_width) && (0<rendering_data.viewport_height)
 			&& Graphics_buffer_is_visible(scene_viewer->graphics_buffer);
-		if (do_render)
+    printf(" --- 3 ---\n");
+        if (do_render)
 		{
-			/* Calculate the transformations before doing the callback list */
+    printf(" --- 3a ---\n");
+            /* Calculate the transformations before doing the callback list */
 			Scene_viewer_calculate_transformation(scene_viewer,
 				rendering_data.viewport_width,rendering_data.viewport_height);
 
@@ -2105,6 +2108,7 @@ Scene_viewer_render_scene_in_viewport to access this function.
 //						Render_graphics_opengl_create_glbeginend_renderer();
 //				}
 //			}
+    printf(" --- 2 ---\n");
 
 			rendering_data.renderer->set_world_view_matrix(scene_viewer->modelview_matrix);
 			rendering_data.renderer->viewport_width = (double)rendering_data.viewport_width;
