@@ -2111,20 +2111,34 @@ Scene_viewer_render_scene_in_viewport to access this function.
     printf(" --- 2 ---\n");
 
 			rendering_data.renderer->set_world_view_matrix(scene_viewer->modelview_matrix);
-			rendering_data.renderer->viewport_width = (double)rendering_data.viewport_width;
-			rendering_data.renderer->viewport_height = (double)rendering_data.viewport_height;
-			double NDC_left, NDC_top, NDC_width, NDC_height;
+    printf(" --- 1a ---\n");
+            rendering_data.renderer->viewport_width = (double)rendering_data.viewport_width;
+    printf(" --- 1b ---\n");
+            rendering_data.renderer->viewport_height = (double)rendering_data.viewport_height;
+    printf(" --- 1c ---\n");
+            double NDC_left, NDC_top, NDC_width, NDC_height;
 			Scene_viewer_get_NDC_info(scene_viewer, &NDC_left,&NDC_top,&NDC_width,&NDC_height);
-			rendering_data.renderer->NDC_width = NDC_width;
-			rendering_data.renderer->NDC_height = NDC_height;
-			rendering_data.renderer->NDC_left = NDC_left;
-			rendering_data.renderer->NDC_top = NDC_top;
-			GraphicsIncrementalBuild incrementalBuild;
-			rendering_data.renderer->setIncrementalBuild(&incrementalBuild);
-			rendering_data.renderer->Scene_compile(scene_viewer->scene, scene_viewer->filter);
+    printf(" --- 1d ---\n");
+            rendering_data.renderer->NDC_width = NDC_width;
+    printf(" --- 1e ---\n");
+            rendering_data.renderer->NDC_height = NDC_height;
+    printf(" --- 1f ---\n");
+            rendering_data.renderer->NDC_left = NDC_left;
+    printf(" --- 1g ---\n");
+            rendering_data.renderer->NDC_top = NDC_top;
+    printf(" --- 1h ---\n");
+            GraphicsIncrementalBuild incrementalBuild;
+    printf(" --- 1i ---\n");
+            rendering_data.renderer->setIncrementalBuild(&incrementalBuild);
+    printf(" --- 1j ---\n");
+            rendering_data.renderer->Scene_compile(scene_viewer->scene, scene_viewer->filter);
+    printf(" --- 1k ---\n");
 
-			rendering_data.render_callstack = CREATE(LIST(Scene_viewer_render_object))();
-			/* Add functionality to the render callstack */
+    printf(" --- 1l ---\n");
+            rendering_data.render_callstack = CREATE(LIST(Scene_viewer_render_object))();
+    printf(" --- 1m ---\n");
+            /* Add functionality to the render callstack */
+    printf(" --- 1n ---\n");
 
 			if (SCENE_VIEWER_NO_INPUT_OR_DRAW==scene_viewer->input_mode)
 			{
