@@ -117,6 +117,7 @@ int Render_graphics_opengl::Graphics_object_compile(GT_object *graphics_object)
 
 int Render_graphics_opengl::Graphics_compile(cmzn_graphics *graphics)
 {
+printf("graphics compile opengl\n");
 	return Graphics_object_compile_members_opengl(cmzn_graphics_get_graphics_object(
 		graphics), this);
 }
@@ -441,6 +442,7 @@ public:
 		 */
 	  int Graphics_compile(cmzn_graphics *graphics)
 	  {
+      printf("graphics compile vertex buffer\n");
 		  return Graphics_object_compile(cmzn_graphics_get_graphics_object(
 			  graphics));
 	  }
