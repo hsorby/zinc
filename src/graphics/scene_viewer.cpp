@@ -6186,6 +6186,7 @@ graphics window on screen.
 			GRAPHICS_BUFFER_DOUBLE_BUFFERING, GRAPHICS_BUFFER_MONO);
 		graphics_buffer->width = panel_width;
 		graphics_buffer->height = panel_height;
+        printf("================\n");
 #if defined (OPENGL_API) && (GL_EXT_framebuffer_object)
 		if (Graphics_library_load_extension("GL_EXT_framebuffer_object"))
 		{
