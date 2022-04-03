@@ -3335,7 +3335,9 @@ int cmzn_graphics_compile_visible_graphics(
 			cmzn_scenefilter_id filter = renderer->getScenefilter();
 			if ((0 == filter) || (cmzn_scenefilter_evaluate_graphics(filter, graphics)))
 			{
+            printf("compile graphics: %x\n", graphics);
 				return_code = renderer->Graphics_compile(graphics);
+            printf("done: %d\n", return_code);
 			}
 		}
 	}
