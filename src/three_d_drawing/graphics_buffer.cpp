@@ -722,6 +722,7 @@ void Graphics_buffer_blit_framebuffer(struct Graphics_buffer *buffer)
 
 int Graphics_buffer_set_multisample_framebuffer(struct Graphics_buffer *buffer, int preferred_antialias)
 {
+    printf("helllooooooo");
 #ifdef GL_EXT_framebuffer_multisample
 
 	 int antialias;
