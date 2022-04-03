@@ -1309,10 +1309,13 @@ int cmzn_scene_compile_graphics(cmzn_scene *scene,
 	int return_code;
 
 	cmzn_timekeeper *timekeeper;
+    printf("scene compile graphics\n");
 	if ((scene) && (timekeeper = scene->getTimekeeper()))
 	{
 		double original_time = timekeeper->getTime();
-		if (force_rebuild)
+    printf("scene compile graphics %.2f\n", original_time);
+    printf(" - %d\n", force_rebuild);
+        if (force_rebuild)
 		{
 			FOR_EACH_OBJECT_IN_LIST(cmzn_graphics)(
 				cmzn_graphics_flag_for_full_rebuild, (void *)renderer,
@@ -1323,9 +1326,11 @@ int cmzn_scene_compile_graphics(cmzn_scene *scene,
 				cmzn_graphics_compile_visible_graphics, (void *)renderer,
 				scene->list_of_graphics);
 		}
-
+printf(" --- 2a ---\n");
 		/* check whether scene contents need building */
 		return_code = cmzn_scene_build_graphics_objects(scene, renderer);
+printf(" --- 2b --- %d\n", return_code);
+
 		/* call the renderer to compile each of the graphics */
 		FOR_EACH_OBJECT_IN_LIST(cmzn_graphics)(
 			cmzn_graphics_compile_visible_graphics, (void *)renderer,
