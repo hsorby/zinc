@@ -1335,7 +1335,8 @@ printf(" --- 2b --- %d\n", return_code);
 		FOR_EACH_OBJECT_IN_LIST(cmzn_graphics)(
 			cmzn_graphics_compile_visible_graphics, (void *)renderer,
 			scene->list_of_graphics);
-		if (force_rebuild)
+printf(" --- 2c ---\n");
+        if (force_rebuild)
 		{
 			timekeeper->setTimeQuiet(original_time);
 		}

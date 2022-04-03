@@ -3610,6 +3610,7 @@ static int Graphics_object_compile_members_opengl(GT_object *graphics_object_lis
 
 	if (graphics_object_list)
 	{
+    printf("compile members opengl\n");
 		return_code = 1;
 		for (graphics_object=graphics_object_list;graphics_object != NULL;
 			graphics_object=graphics_object->nextobject)
@@ -3689,7 +3690,7 @@ static int Graphics_object_compile_members_opengl(GT_object *graphics_object_lis
 		display_message(ERROR_MESSAGE,"Graphics_object_compile_members.  Invalid argument(s)");
 		return_code = 0;
 	}
-
+printf("leaving Graphics_object_compile_members\n");
 	return (return_code);
 } /* Graphics_object_compile_members */
 
