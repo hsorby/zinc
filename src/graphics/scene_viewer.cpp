@@ -1982,11 +1982,11 @@ Scene_viewer_render_scene_in_viewport to access this function.
 			rendering_data.viewport_height = top - bottom;
 		}
 
-#if defined (DEBUG_CODE)
+//#if defined (DEBUG_CODE)
 		printf ("Viewport data %d,%d %d,%d\n",
 			rendering_data.viewport_left, rendering_data.viewport_bottom,
 			rendering_data.viewport_width, rendering_data.viewport_height);
-#endif /* defined (DEBUG_CODE) */
+//#endif /* defined (DEBUG_CODE) */
 
 		rendering_data.scene_viewer = scene_viewer;
 		rendering_data.render_callstack =
@@ -2139,6 +2139,7 @@ Scene_viewer_render_scene_in_viewport to access this function.
 						rendering_data.render_callstack);
 				}
 
+    printf(" --- 1 ---\n");
 				/* Initialise the matricies and handle the double buffer flag */
 				render_object = CREATE(Scene_viewer_render_object)(
 					Scene_viewer_initialise_matrices_and_swap_buffers);
@@ -6197,6 +6198,7 @@ graphics window on screen.
 #endif
 		if (!force_onscreen)
 		{
+            printf("not forcing onscreen\n");
 			cmzn_sceneviewer_render_scene(scene_viewer);
 			number_of_components =
 				Texture_storage_type_get_number_of_components(storage);
