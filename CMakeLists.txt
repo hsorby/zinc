@@ -147,6 +147,11 @@ SET_GRAPHICS_DEFINES( )
 
 if(${GRAPHICS_API} MATCHES OPENGL_GRAPHICS )
     find_package(OpenGL REQUIRED )
+    find_package(OSMesa)
+    message(STATUS "OSMesa_FOUND: ${OSMesa_FOUND}")
+    message(STATUS "OSMesa_INCLUDE_DIRS: ${OSMesa_INCLUDE_DIRS}")
+    message(STATUS "OSMesa_LIBRARIES: ${OSMesa_LIBRARIES}")
+    message(STATUS "OSMesa_GL_LIBRARIES: ${OSMesa_GL_LIBRARIES}")
     set(DEPENDENT_LIBS ${DEPENDENT_LIBS} ${OPENGL_LIBRARIES} )
 endif()
 
