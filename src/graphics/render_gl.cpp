@@ -1750,6 +1750,7 @@ printf("enter: Graphics_object_compile_opengl_vertex_buffer_object\n");
 					&position_vertex_count))
 				{
         printf(" --- 1c\n");
+        printf("opengl string: %s\n", glGetString(GL_VERSION));
                     if (!object->position_vertex_buffer_object)
 					{
         printf(" --- 1d\n");
