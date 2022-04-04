@@ -153,7 +153,7 @@ IF(OSMesa_LIBRARIES)
 
   # Try to fix a bug in Linux that omits libdl
   IF(CMAKE_SYSTEM_NAME STREQUAL "Linux")
-    SET(OSMesa_LIBRARIES ${OSMesa_LIBRARIES} -ldl)
+    SET(OSMesa_LIBRARIES ${OSMesa_LIBRARIES})
   ENDIF(CMAKE_SYSTEM_NAME STREQUAL "Linux")
 
   IF(OSMesa_GLU_LIBRARIES)
