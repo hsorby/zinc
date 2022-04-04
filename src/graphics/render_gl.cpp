@@ -1755,6 +1755,7 @@ printf("enter: Graphics_object_compile_opengl_vertex_buffer_object\n");
 					{
         printf(" --- 1d\n");
                         object->buffer_binding = 1;
+                        printf("%x\n", &object->position_vertex_buffer_object);
 						glGenBuffers(1, &object->position_vertex_buffer_object);
 					}
         printf(" --- 1e\n");
