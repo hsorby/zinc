@@ -6219,10 +6219,12 @@ graphics window on screen.
             printf("not forcing onscreen\n");
 			cmzn_sceneviewer_render_scene(scene_viewer);
 			number_of_components =
-				Texture_storage_type_get_number_of_components(storage);
+                Texture_storage_type_get_number_of_components(storage);
+                printf("number of components: %d\n", number_of_components);
 			if (ALLOCATE(*frame_data, unsigned char,
 				number_of_components * (frame_width) * (frame_height)))
 			{
+            printf("right here\n");
 				return_code = 1;
 #if defined (OPENGL_API)
 printf("opengl API\n");
