@@ -6225,7 +6225,9 @@ graphics window on screen.
 			{
 				return_code = 1;
 #if defined (OPENGL_API)
+printf("opengl API\n");
 #if defined (USE_MSAA)
+printf("use msaa\n");
 				if (antialias > 1)
 				{
 						multisample_framebuffer_flag =
