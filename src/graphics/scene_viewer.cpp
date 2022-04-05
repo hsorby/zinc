@@ -2013,13 +2013,10 @@ Scene_viewer_render_scene_in_viewport to access this function.
 
 		/* only redraw if the drawing widget has area and neither it nor any of its
 			 parents are unmanaged */
-    printf(" --- 4 ---\n");
         do_render=(0<rendering_data.viewport_width) && (0<rendering_data.viewport_height)
 			&& Graphics_buffer_is_visible(scene_viewer->graphics_buffer);
-    printf(" --- 3 ---\n");
         if (do_render)
 		{
-    printf(" --- 3a ---\n");
             /* Calculate the transformations before doing the callback list */
 			Scene_viewer_calculate_transformation(scene_viewer,
 				rendering_data.viewport_width,rendering_data.viewport_height);
@@ -2108,37 +2105,22 @@ Scene_viewer_render_scene_in_viewport to access this function.
 //						Render_graphics_opengl_create_glbeginend_renderer();
 //				}
 //			}
-    printf(" --- 2 ---\n");
 
 			rendering_data.renderer->set_world_view_matrix(scene_viewer->modelview_matrix);
-    printf(" --- 1a ---\n");
             rendering_data.renderer->viewport_width = (double)rendering_data.viewport_width;
-    printf(" --- 1b ---\n");
             rendering_data.renderer->viewport_height = (double)rendering_data.viewport_height;
-    printf(" --- 1c ---\n");
             double NDC_left, NDC_top, NDC_width, NDC_height;
 			Scene_viewer_get_NDC_info(scene_viewer, &NDC_left,&NDC_top,&NDC_width,&NDC_height);
-    printf(" --- 1d ---\n");
             rendering_data.renderer->NDC_width = NDC_width;
-    printf(" --- 1e ---\n");
             rendering_data.renderer->NDC_height = NDC_height;
-    printf(" --- 1f ---\n");
             rendering_data.renderer->NDC_left = NDC_left;
-    printf(" --- 1g ---\n");
             rendering_data.renderer->NDC_top = NDC_top;
-    printf(" --- 1h ---\n");
             GraphicsIncrementalBuild incrementalBuild;
-    printf(" --- 1i ---\n");
             rendering_data.renderer->setIncrementalBuild(&incrementalBuild);
-    printf(" --- 1j ---\n");
             rendering_data.renderer->Scene_compile(scene_viewer->scene, scene_viewer->filter);
-    printf(" --- 1k ---\n");
 
-    printf(" --- 1l ---\n");
             rendering_data.render_callstack = CREATE(LIST(Scene_viewer_render_object))();
-    printf(" --- 1m ---\n");
             /* Add functionality to the render callstack */
-    printf(" --- 1n ---\n");
 
 			if (SCENE_VIEWER_NO_INPUT_OR_DRAW==scene_viewer->input_mode)
 			{
@@ -2157,7 +2139,6 @@ Scene_viewer_render_scene_in_viewport to access this function.
 						rendering_data.render_callstack);
 				}
 
-    printf(" --- 1 ---\n");
 				/* Initialise the matricies and handle the double buffer flag */
 				render_object = CREATE(Scene_viewer_render_object)(
 					Scene_viewer_initialise_matrices_and_swap_buffers);
@@ -6205,7 +6186,6 @@ graphics window on screen.
 			GRAPHICS_BUFFER_DOUBLE_BUFFERING, GRAPHICS_BUFFER_MONO);
 		graphics_buffer->width = panel_width;
 		graphics_buffer->height = panel_height;
-        printf("================\n");
 #if defined (OPENGL_API) && (GL_EXT_framebuffer_object)
 		if (Graphics_library_load_extension("GL_EXT_framebuffer_object"))
 		{
@@ -6216,20 +6196,15 @@ graphics window on screen.
 #endif
 		if (!force_onscreen)
 		{
-            printf("not forcing onscreen\n");
 			cmzn_sceneviewer_render_scene(scene_viewer);
 			number_of_components =
                 Texture_storage_type_get_number_of_components(storage);
-                printf("number of components: %d\n", number_of_components);
 			if (ALLOCATE(*frame_data, unsigned char,
 				number_of_components * (frame_width) * (frame_height)))
 			{
-            printf("right here\n");
 				return_code = 1;
 #if defined (OPENGL_API)
-printf("opengl API\n");
 #if defined (USE_MSAA)
-printf("use msaa\n");
 				if (antialias > 1)
 				{
 						multisample_framebuffer_flag =

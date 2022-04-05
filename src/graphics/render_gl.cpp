@@ -442,7 +442,6 @@ public:
 		 */
 	  int Graphics_compile(cmzn_graphics *graphics)
 	  {
-      printf("graphics compile vertex buffer\n");
 		  return Graphics_object_compile(cmzn_graphics_get_graphics_object(
 			  graphics));
 	  }
@@ -1699,7 +1698,6 @@ static int Graphics_object_compile_opengl_vertex_buffer_object(GT_object *object
 
 	ENTER(Graphics_object_compile_opengl_vertex_buffer_object);
 
-printf("enter: Graphics_object_compile_opengl_vertex_buffer_object\n");
 	if (object)
 	{
 		return_code = 1;
@@ -1707,7 +1705,6 @@ printf("enter: Graphics_object_compile_opengl_vertex_buffer_object\n");
 		{
 		case g_GLYPH_SET_VERTEX_BUFFERS:
 		{
-        printf(" --- 0\n");
 			GT_glyphset_vertex_buffers *glyph_set = NULL;
 			if (object->primitive_lists)
 				glyph_set = object->primitive_lists->gt_glyphset_vertex_buffers;
@@ -1715,9 +1712,7 @@ printf("enter: Graphics_object_compile_opengl_vertex_buffer_object\n");
 			{
 				if (glyph_set->glyph)
 				{
-                printf("--- 0a\n");
 					Graphics_object_compile_opengl_vertex_buffer_object(glyph_set->glyph, renderer);
-                printf("--- 0b\n");
                 }
 				if (glyph_set->font)
 					cmzn_font_compile(glyph_set->font);
@@ -1727,7 +1722,6 @@ printf("enter: Graphics_object_compile_opengl_vertex_buffer_object\n");
 		case g_SURFACE_VERTEX_BUFFERS:
 		case g_POINT_SET_VERTEX_BUFFERS:
 			{
-        printf(" --- 1\n");
                 unsigned int *partialRedrawIndices = 0;
 				unsigned int partialRedrawIndicesPerVertex, partialRedrawIndicesCount;
 				unsigned int *redraw_count_buffer = 0;
@@ -1736,12 +1730,10 @@ printf("enter: Graphics_object_compile_opengl_vertex_buffer_object\n");
 						GRAPHICS_VERTEX_ARRAY_ATTRIBUTE_TYPE_PARTIAL_REDRAW,
 						&partialRedrawIndices, &partialRedrawIndicesPerVertex,
 						&partialRedrawIndicesCount);
-        printf(" --- 1a\n");
                 object->vertex_array->get_unsigned_integer_vertex_buffer(
 						GRAPHICS_VERTEX_ARRAY_ATTRIBUTE_TYPE_PARTIAL_REDRAW_COUNT,
 						&redraw_count_buffer, &redrawPerVertex,
 						&redrawCount);
-        printf(" --- 1b\n");
                 GLfloat *position_vertex_buffer = NULL;
 				unsigned int position_values_per_vertex, position_vertex_count;
 				if (object->vertex_array->get_float_vertex_buffer(
@@ -1749,16 +1741,11 @@ printf("enter: Graphics_object_compile_opengl_vertex_buffer_object\n");
 					&position_vertex_buffer, &position_values_per_vertex,
 					&position_vertex_count))
 				{
-        printf(" --- 1c\n");
-        printf("opengl string: %s\n", glGetString(GL_VERSION));
                     if (!object->position_vertex_buffer_object)
 					{
-        printf(" --- 1d\n");
                         object->buffer_binding = 1;
-                        printf("%x\n", &object->position_vertex_buffer_object);
 						glGenBuffers(1, &object->position_vertex_buffer_object);
 					}
-        printf(" --- 1e\n");
 
 					if (object->secondary_material)
 					{
@@ -1768,9 +1755,7 @@ printf("enter: Graphics_object_compile_opengl_vertex_buffer_object\n");
 					}
 					else if (object->buffer_binding)
 					{
-        printf(" --- 1f\n");
                         glBindBuffer(GL_ARRAY_BUFFER, object->position_vertex_buffer_object);
-        printf(" --- 1g\n");
                         if (!partialRedrawIndices)
 							glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat)*
 									position_values_per_vertex*position_vertex_count,
@@ -1800,12 +1785,10 @@ printf("enter: Graphics_object_compile_opengl_vertex_buffer_object\n");
 				}
 				unsigned int colour_values_per_vertex, colour_vertex_count;
 				GLfloat *colour_buffer = (GLfloat *)NULL;
-        printf(" --- 1h\n");
                 if (Graphics_object_create_colour_buffer_from_data(object,
 					&colour_buffer,
 					&colour_values_per_vertex, &colour_vertex_count))
 				{
-        printf(" --- 1i\n");
                     if ((object->buffer_binding || (object->compile_status == GRAPHICS_NOT_COMPILED)) &&
 							(colour_vertex_count == position_vertex_count))
 					{
@@ -1825,7 +1808,6 @@ printf("enter: Graphics_object_compile_opengl_vertex_buffer_object\n");
 				}
 				else
 				{
-        printf(" --- 1j\n");
                     if (colour_buffer)
 					{
 						DEALLOCATE(colour_buffer);
@@ -1839,24 +1821,18 @@ printf("enter: Graphics_object_compile_opengl_vertex_buffer_object\n");
 
 				GLfloat *normal_buffer = NULL;
 				unsigned int normal_values_per_vertex, normal_vertex_count;
-        printf(" --- 1k\n");
                 if (object->vertex_array->get_float_vertex_buffer(
 					GRAPHICS_VERTEX_ARRAY_ATTRIBUTE_TYPE_NORMAL,
 					&normal_buffer, &normal_values_per_vertex, &normal_vertex_count)
 					&& (3 == normal_values_per_vertex))
 				{
-        printf(" --- 1l\n");
                     if (!object->normal_vertex_buffer_object)
 					{
-        printf(" --- 1m\n");
                         glGenBuffers(1, &object->normal_vertex_buffer_object);
-        printf(" --- 1n\n");
                     }
 					if (object->buffer_binding)
 					{
-        printf(" --- 1o\n");
                         glBindBuffer(GL_ARRAY_BUFFER, object->normal_vertex_buffer_object);
-        printf(" --- 1p\n");
                         if (!partialRedrawIndices)
 							glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat)*normal_values_per_vertex*normal_vertex_count,
 								normal_buffer, GL_STATIC_DRAW);
@@ -1882,7 +1858,6 @@ printf("enter: Graphics_object_compile_opengl_vertex_buffer_object\n");
 					}
 				}
 
-        printf(" --- 1q\n");
                 GLfloat *texture_coordinate0_buffer = NULL;
 				unsigned int texture_coordinate0_values_per_vertex,
 					texture_coordinate0_vertex_count;
@@ -1892,18 +1867,13 @@ printf("enter: Graphics_object_compile_opengl_vertex_buffer_object\n");
 					&texture_coordinate0_vertex_count)
 					&& (texture_coordinate0_vertex_count == position_vertex_count))
 				{
-        printf(" --- 1r\n");
                     if (!object->texture_coordinate0_vertex_buffer_object)
 					{
-        printf(" --- 1s\n");
                         glGenBuffers(1, &object->texture_coordinate0_vertex_buffer_object);
-        printf(" --- 1t\n");
                     }
 					if (object->buffer_binding)
 					{
-        printf(" --- 1u\n");
                         glBindBuffer(GL_ARRAY_BUFFER, object->texture_coordinate0_vertex_buffer_object);
-        printf(" --- 1v\n");
                         if (!partialRedrawIndices)
 							glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat)*texture_coordinate0_values_per_vertex*texture_coordinate0_vertex_count,
 								texture_coordinate0_buffer, GL_STATIC_DRAW);
@@ -1931,7 +1901,6 @@ printf("enter: Graphics_object_compile_opengl_vertex_buffer_object\n");
 					}
 				}
 
-        printf(" --- 1w\n");
                 GLfloat *tangent_buffer = NULL;
 				unsigned int tangent_values_per_vertex,
 					tangent_vertex_count;
@@ -1941,16 +1910,11 @@ printf("enter: Graphics_object_compile_opengl_vertex_buffer_object\n");
 					&tangent_vertex_count) &&
 					(tangent_vertex_count == position_vertex_count))
 				{
-        printf(" --- 1x\n");
                     if (!object->tangent_vertex_buffer_object)
 					{
-        printf(" --- 1\n");
                         glGenBuffers(1, &object->tangent_vertex_buffer_object);
-        printf(" --- 1y\n");
                     }
-        printf(" --- 1z\n");
                     glBindBuffer(GL_ARRAY_BUFFER, object->tangent_vertex_buffer_object);
-        printf(" --- 1aa\n");
                     if (!partialRedrawIndices)
 						glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat)*tangent_values_per_vertex*tangent_vertex_count,
 								tangent_buffer, GL_STATIC_DRAW);
@@ -2035,7 +1999,6 @@ printf("enter: Graphics_object_compile_opengl_vertex_buffer_object\n");
 			} break;
 		default:
 			{
-        printf(" --- 2\n");
                 /* Do nothing */
 			} break;
 		}
@@ -2044,16 +2007,13 @@ printf("enter: Graphics_object_compile_opengl_vertex_buffer_object\n");
 		{
 			Graphics_object_compile_opengl_vertex_buffer_object(temp_glyph, renderer);
 		}
-                printf(" --- 3\n");
 
 		object->buffer_binding = 0;
 		object->vertex_array->clear_specified_buffer(
 			GRAPHICS_VERTEX_ARRAY_ATTRIBUTE_TYPE_PARTIAL_REDRAW);
-                    printf(" --- 4\n");
 
 		object->vertex_array->clear_specified_buffer(
 			GRAPHICS_VERTEX_ARRAY_ATTRIBUTE_TYPE_PARTIAL_REDRAW_COUNT);
-                    printf(" --- 5\n");
 
 		object->compile_status = GRAPHICS_COMPILED;
 	}
@@ -2062,7 +2022,6 @@ printf("enter: Graphics_object_compile_opengl_vertex_buffer_object\n");
 		/* Nothing to do */
 		return_code = 1;
 	}
-printf("leave: Graphics_object_compile_opengl_vertex_buffer_object\n");
     return (return_code);
 } /* Graphics_object_compile_opengl_vertex_buffer_object */
 
@@ -3655,7 +3614,6 @@ static int Graphics_object_compile_members_opengl(GT_object *graphics_object_lis
 
 	if (graphics_object_list)
 	{
-    printf("compile members opengl\n");
 		return_code = 1;
 		for (graphics_object=graphics_object_list;graphics_object != NULL;
 			graphics_object=graphics_object->nextobject)
