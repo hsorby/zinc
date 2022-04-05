@@ -1982,11 +1982,11 @@ Scene_viewer_render_scene_in_viewport to access this function.
 			rendering_data.viewport_height = top - bottom;
 		}
 
-//#if defined (DEBUG_CODE)
+#if defined (DEBUG_CODE)
 		printf ("Viewport data %d,%d %d,%d\n",
 			rendering_data.viewport_left, rendering_data.viewport_bottom,
 			rendering_data.viewport_width, rendering_data.viewport_height);
-//#endif /* defined (DEBUG_CODE) */
+#endif /* defined (DEBUG_CODE) */
 
 		rendering_data.scene_viewer = scene_viewer;
 		rendering_data.render_callstack =
