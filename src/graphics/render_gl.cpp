@@ -1741,14 +1741,11 @@ static int Graphics_object_compile_opengl_vertex_buffer_object(GT_object *object
 					&position_vertex_buffer, &position_values_per_vertex,
 					&position_vertex_count))
 				{
-        printf(" ----- \n");
-        printf("%d\n", object->buffer_binding);
-        printf("%x\n", object->position_vertex_buffer_object);
+
                     if (!object->position_vertex_buffer_object)
 					{
                         object->buffer_binding = 1;
 						glGenBuffers(1, &object->position_vertex_buffer_object);
-        printf("gen: %x\n", object->position_vertex_buffer_object);
                     }
 
 					if (object->secondary_material)
@@ -1785,7 +1782,6 @@ static int Graphics_object_compile_opengl_vertex_buffer_object(GT_object *object
 					{
 						glDeleteBuffers(1, &object->position_vertex_buffer_object);
 						object->position_vertex_buffer_object = 0;
-        printf("deleting buffer\n");
 					}
 				}
 				unsigned int colour_values_per_vertex, colour_vertex_count;
@@ -1944,7 +1940,6 @@ static int Graphics_object_compile_opengl_vertex_buffer_object(GT_object *object
 						object->tangent_vertex_buffer_object = 0;
 					}
 				}
-    printf("here\n");
 				if ((GT_object_get_type(object) == g_POLYLINE_VERTEX_BUFFERS) &&
 					position_vertex_buffer && object->secondary_material)
 				{
@@ -2010,7 +2005,6 @@ static int Graphics_object_compile_opengl_vertex_buffer_object(GT_object *object
 		GT_object *temp_glyph = GT_object_get_next_object(object);
 		if (temp_glyph)
 		{
-        printf("compile Graphics_object_compile_opengl_vertex_buffer_object\n");
 			Graphics_object_compile_opengl_vertex_buffer_object(temp_glyph, renderer);
 		}
 
@@ -2874,7 +2868,6 @@ int drawGLSurfaces(gtObject *object, Render_graphics_opengl *renderer,
 	cmzn_material *material, int draw_selected)
 {
 	int return_code = 1;
-    printf("enter drawGLSurfaces\n");
 	if (object && renderer && primitive_list)
 	{
 		int name_selected = 0;
@@ -2882,7 +2875,6 @@ int drawGLSurfaces(gtObject *object, Render_graphics_opengl *renderer,
 		struct Graphics_vertex_array *array = object->vertex_array;
 		if (vb_surface)
 		{
-    printf("vertex buffer surface\n");
 
 			GLenum mode = g_TRIANGLE;
 			switch (vb_surface->surface_type)
@@ -2904,7 +2896,6 @@ int drawGLSurfaces(gtObject *object, Render_graphics_opengl *renderer,
 					mode = GL_TRIANGLE_STRIP;
 				}
 				*/
-    printf("triangle strip\n");
 				mode = GL_TRIANGLE_STRIP;
 			} break;
 			case g_SH_DISCONTINUOUS:
@@ -2912,7 +2903,6 @@ int drawGLSurfaces(gtObject *object, Render_graphics_opengl *renderer,
 			case g_SH_DISCONTINUOUS_TEXMAP:
 			case g_SH_DISCONTINUOUS_STRIP_TEXMAP:
 			{
-    printf("triangles\n");
                 mode = GL_TRIANGLES;
 			} break;
 			default:
@@ -2935,7 +2925,6 @@ int drawGLSurfaces(gtObject *object, Render_graphics_opengl *renderer,
 			unsigned int surface_count =
 				array->get_number_of_vertices(
 					GRAPHICS_VERTEX_ARRAY_ATTRIBUTE_TYPE_ELEMENT_INDEX_START);
-        printf("surface count %d\n", surface_count);
 
 			GLfloat *position_buffer = 0, *data_buffer = 0, *normal_buffer = 0,
 				*texture_coordinate0_buffer = 0, *tangent_buffer = 0;
