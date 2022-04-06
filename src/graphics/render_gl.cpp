@@ -3122,7 +3122,9 @@ int drawGLSurfaces(gtObject *object, Render_graphics_opengl *renderer,
 												strip_start+i, 1, &index_start_for_strip);
 											array->get_unsigned_integer_attribute(GRAPHICS_VERTEX_ARRAY_ATTRIBUTE_TYPE_NUMBER_OF_POINTS_FOR_STRIP,
 												strip_start+i, 1, &points_per_strip);
-											if (object->index_vertex_buffer_object)
+    printf("vertex array triangle strip\n");
+    printf("points_per_strip: %d\n", points_per_strip);
+                                            if (object->index_vertex_buffer_object)
 											{
 												glDrawElements(mode, points_per_strip, GL_UNSIGNED_INT, BUFFER_OFFSET(sizeof(GLuint) * index_start_for_strip));
 											}
