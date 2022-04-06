@@ -3006,6 +3006,8 @@ int drawGLSurfaces(gtObject *object, Render_graphics_opengl *renderer,
 					/* no object name, draw only glyphs provide no object id */
 					object_name = 0;
 				}
+    printf("object_name: %d\n", object_name);
+
 				if (object_name > -1)
 				{
 					/* work out if subobjects selected */
@@ -3017,7 +3019,9 @@ int drawGLSurfaces(gtObject *object, Render_graphics_opengl *renderer,
 					{
 						name_selected = 0;
 					}
-					if ((name_selected&&draw_selected)||
+    printf("name_selected: %d\n", name_selected);
+    printf("draw_selected: %d\n", draw_selected);
+                    if ((name_selected&&draw_selected)||
 						((!name_selected)&&(!draw_selected)))
 					{
 						if (picking_names)
