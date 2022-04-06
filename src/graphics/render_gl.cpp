@@ -2874,6 +2874,7 @@ int drawGLSurfaces(gtObject *object, Render_graphics_opengl *renderer,
 	cmzn_material *material, int draw_selected)
 {
 	int return_code = 1;
+    printf("enter drawGLSurfaces\n");
 	if (object && renderer && primitive_list)
 	{
 		int name_selected = 0;
