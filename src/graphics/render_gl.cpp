@@ -3068,13 +3068,17 @@ int drawGLSurfaces(gtObject *object, Render_graphics_opengl *renderer,
 												strip_start+i, 1, &points_per_strip);
 											unsigned int *indices = &index_vertex_buffer[index_start_for_strip];
 											glBegin(GL_TRIANGLE_STRIP);
+                                            printf("position: ");
 											for (unsigned int j = 0; j < points_per_strip; j++)
 											{
 												current_position = &(position_buffer[*indices * position_values_per_vertex]);
 												glVertex3fv(current_position);
+    printf("%.2f - ", current_position);
+
 												indices++;
 											}
-											glEnd();
+    printf("\n");
+                                            glEnd();
 										}
 									} break;
 									case GL_TRIANGLES:
