@@ -2991,7 +2991,6 @@ int drawGLSurfaces(gtObject *object, Render_graphics_opengl *renderer,
 			} break;
 			case GRAPHICS_OBJECT_RENDERING_TYPE_VERTEX_BUFFER_OBJECT:
 			{
-    printf("enable vertex buffer object\n");
                 Graphics_object_enable_opengl_vertex_buffer_object(
 					object, renderer);
 			} break;
@@ -3006,7 +3005,6 @@ int drawGLSurfaces(gtObject *object, Render_graphics_opengl *renderer,
 					/* no object name, draw only glyphs provide no object id */
 					object_name = 0;
 				}
-    printf("object_name: %d\n", object_name);
 
 				if (object_name > -1)
 				{
