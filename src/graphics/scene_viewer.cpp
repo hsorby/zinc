@@ -6254,7 +6254,6 @@ graphics window on screen.
 	if (scene_viewer && width && height)
 	{
     printf("forcing build of scene: %d, %d\n", *width, *height);
-    render_image();
     return 1;
 		// force complete build of all graphics in scene for image output: not incremental
 		build_Scene(scene_viewer->scene, scene_viewer->filter);
@@ -6519,6 +6518,8 @@ Currently limited to 1 byte per component -- may want to improve for HPC.
 	cmgui_image = (struct Cmgui_image *)NULL;
 	if (scene_viewer)
 	{
+        render_image();
+
 		number_of_components =
 			Texture_storage_type_get_number_of_components(storage);
 		number_of_bytes_per_component = 1;
