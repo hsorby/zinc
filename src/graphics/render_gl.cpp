@@ -1748,7 +1748,8 @@ static int Graphics_object_compile_opengl_vertex_buffer_object(GT_object *object
 					{
                         object->buffer_binding = 1;
 						glGenBuffers(1, &object->position_vertex_buffer_object);
-					}
+        printf("gen: %x\n", object->position_vertex_buffer_object);
+                    }
 
 					if (object->secondary_material)
 					{
@@ -1784,6 +1785,7 @@ static int Graphics_object_compile_opengl_vertex_buffer_object(GT_object *object
 					{
 						glDeleteBuffers(1, &object->position_vertex_buffer_object);
 						object->position_vertex_buffer_object = 0;
+        printf("deleting buffer\n");
 					}
 				}
 				unsigned int colour_values_per_vertex, colour_vertex_count;
@@ -1942,7 +1944,7 @@ static int Graphics_object_compile_opengl_vertex_buffer_object(GT_object *object
 						object->tangent_vertex_buffer_object = 0;
 					}
 				}
-
+    printf("here\n");
 				if ((GT_object_get_type(object) == g_POLYLINE_VERTEX_BUFFERS) &&
 					position_vertex_buffer && object->secondary_material)
 				{
@@ -2008,6 +2010,7 @@ static int Graphics_object_compile_opengl_vertex_buffer_object(GT_object *object
 		GT_object *temp_glyph = GT_object_get_next_object(object);
 		if (temp_glyph)
 		{
+        printf("compile Graphics_object_compile_opengl_vertex_buffer_object\n");
 			Graphics_object_compile_opengl_vertex_buffer_object(temp_glyph, renderer);
 		}
 
