@@ -7208,7 +7208,6 @@ that the images be adjoined in the single file.
 						temp_next = magick_image->next;
 						magick_image->next = (Image *)NULL;
 					}
-printf("write image: %s\n", magick_image_info->size);
                     if (!WriteImage(magick_image_info, magick_image, magick_exception))
 					{
 						display_message(ERROR_MESSAGE,
