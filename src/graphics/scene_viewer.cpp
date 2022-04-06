@@ -6097,6 +6097,127 @@ The most common task will to list the lights in the scene with show_cmzn_light.
 	return (return_code);
 } /* for_each_cmzn_light_in_Scene_viewer */
 
+static void render_image( void )
+{
+   GLfloat light_ambient[] = { 0.0, 0.0, 0.0, 1.0 };
+   GLfloat light_diffuse[] = { 1.0, 1.0, 1.0, 1.0 };
+   GLfloat light_specular[] = { 1.0, 1.0, 1.0, 1.0 };
+   GLfloat light_position[] = { 1.0, 1.0, 1.0, 0.0 };
+   GLfloat red_mat[]   = { 1.0, 0.2, 0.2, 1.0 };
+   GLfloat green_mat[] = { 0.2, 1.0, 0.2, 0.5 };
+   GLfloat blue_mat[]  = { 0.2, 0.2, 1.0, 1.0 };
+   GLfloat white_mat[]  = { 1.0, 1.0, 1.0, 1.0 };
+   GLfloat purple_mat[] = { 1.0, 0.2, 1.0, 1.0 };
+   GLUquadricObj *qobj = gluNewQuadric();
+
+   glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient);
+   glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse);
+   glLightfv(GL_LIGHT0, GL_SPECULAR, light_specular);
+   glLightfv(GL_LIGHT0, GL_POSITION, light_position);
+
+   glEnable(GL_LIGHTING);
+   glEnable(GL_LIGHT0);
+   glEnable(GL_DEPTH_TEST);
+
+   glMatrixMode(GL_PROJECTION);
+   glLoadIdentity();
+   glOrtho(-2.5, 2.5, -2.5, 2.5, -10.0, 10.0);
+   glMatrixMode(GL_MODELVIEW);
+
+   glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
+
+   glPushMatrix();
+   glRotatef(20.0, 1.0, 0.0, 0.0);
+
+#if 0
+   glPushMatrix();
+   glTranslatef(-0.75, 0.5, 0.0);
+   glRotatef(90.0, 1.0, 0.0, 0.0);
+   glMaterialfv( GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE, red_mat );
+   glutSolidTorus(0.275, 0.85, 20, 20);
+   glPopMatrix();
+#endif
+
+   /* red square */
+   glPushMatrix();
+   glTranslatef(0.0, -0.5, 0.0);
+   glRotatef(90, 1, 0.5, 0);
+   glScalef(3, 3, 3);
+   glDisable(GL_LIGHTING);
+   glColor4f(1, 0, 0, 0.5);
+   glBegin(GL_POLYGON);
+   glVertex2f(-1, -1);
+   glVertex2f( 1, -1);
+   glVertex2f( 1,  1);
+   glVertex2f(-1,  1);
+   glEnd();
+   glEnable(GL_LIGHTING);
+   glPopMatrix();
+
+#if 0
+   /* green square */
+   glPushMatrix();
+   glTranslatef(0.0, 0.5, 0.1);
+   glDisable(GL_LIGHTING);
+   glColor3f(0, 1, 0);
+   glBegin(GL_POLYGON);
+   glVertex2f(-1, -1);
+   glVertex2f( 1, -1);
+   glVertex2f( 1,  1);
+   glVertex2f(-1,  1);
+   glEnd();
+   glEnable(GL_LIGHTING);
+   glPopMatrix();
+   /* blue square */
+   glPushMatrix();
+   glTranslatef(0.75, 0.5, 0.3);
+   glDisable(GL_LIGHTING);
+   glColor3f(0, 0, 0.5);
+   glBegin(GL_POLYGON);
+   glVertex2f(-1, -1);
+   glVertex2f( 1, -1);
+   glVertex2f( 1,  1);
+   glVertex2f(-1,  1);
+   glEnd();
+   glEnable(GL_LIGHTING);
+   glPopMatrix();
+#endif
+   glPushMatrix();
+   glTranslatef(-0.75, -0.5, 0.0);
+   glRotatef(270.0, 1.0, 0.0, 0.0);
+   glMaterialfv( GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE, green_mat );
+   glColor4f(0,1,0,0.5);
+   glEnable(GL_BLEND);
+   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+   gluCylinder(qobj, 1.0, 0.0, 2.0, 16, 1);
+   glDisable(GL_BLEND);
+   glPopMatrix();
+
+   glPushMatrix();
+   glTranslatef(0.75, 1.0, 1.0);
+   glMaterialfv( GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE, blue_mat );
+   gluSphere(qobj, 1.0, 20, 20);
+   glPopMatrix();
+
+   glPopMatrix();
+
+   /* This is very important!!!
+    * Make sure buffered commands are finished!!!
+    */
+   glFinish();
+
+   gluDeleteQuadric(qobj);
+
+   {
+      GLint r, g, b, a;
+      glGetIntegerv(GL_RED_BITS, &r);
+      glGetIntegerv(GL_GREEN_BITS, &g);
+      glGetIntegerv(GL_BLUE_BITS, &b);
+      glGetIntegerv(GL_ALPHA_BITS, &a);
+      printf("channel sizes: %d %d %d %d\n", r, g, b, a);
+   }
+}
+
 int Scene_viewer_get_frame_pixels(struct Scene_viewer *scene_viewer,
 	enum Texture_storage_type storage, int *width, int *height,
 	int preferred_antialias, int preferred_transparency_layers,
@@ -6133,6 +6254,7 @@ graphics window on screen.
 	if (scene_viewer && width && height)
 	{
     printf("forcing build of scene: %d, %d\n", *width, *height);
+    render_image();
 		// force complete build of all graphics in scene for image output: not incremental
 		build_Scene(scene_viewer->scene, scene_viewer->filter);
 
