@@ -1399,11 +1399,11 @@ static int Graphics_object_disable_opengl_client_vertex_arrays(GT_object *object
 
 /* Require glDrawBuffers from OpenGL 2.0 */
 #if defined (GL_VERSION_2_0)
-/***************************************************************************//**
-																			 * Uses the secondary material (which is assumed to write GLfloat colour values) to
-																			 * calculate a vertex buffer which will be used as the primitive vertex positions
-																			 * when finally actually rendering geometry.
-																			 */
+/**
+ * Uses the secondary material (which is assumed to write GLfloat colour values) to
+ * calculate a vertex buffer which will be used as the primitive vertex positions
+ * when finally actually rendering geometry.
+ */
 static int Graphics_object_generate_vertex_positions_from_secondary_material(GT_object *object,
 	Render_graphics_opengl *renderer, GLfloat *position_vertex_buffer,
 	unsigned int position_values_per_vertex, unsigned int position_vertex_count)
@@ -1741,6 +1741,9 @@ static int Graphics_object_compile_opengl_vertex_buffer_object(GT_object *object
 					&position_vertex_buffer, &position_values_per_vertex,
 					&position_vertex_count))
 				{
+        printf(" ----- \n");
+        printf("%d\n", object->buffer_binding);
+        printf("%x\n", object->position_vertex_buffer_object);
                     if (!object->position_vertex_buffer_object)
 					{
                         object->buffer_binding = 1;
