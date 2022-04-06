@@ -3019,8 +3019,6 @@ int drawGLSurfaces(gtObject *object, Render_graphics_opengl *renderer,
 					{
 						name_selected = 0;
 					}
-    printf("name_selected: %d\n", name_selected);
-    printf("draw_selected: %d\n", draw_selected);
                     if ((name_selected&&draw_selected)||
 						((!name_selected)&&(!draw_selected)))
 					{
@@ -3072,16 +3070,13 @@ int drawGLSurfaces(gtObject *object, Render_graphics_opengl *renderer,
 												strip_start+i, 1, &points_per_strip);
 											unsigned int *indices = &index_vertex_buffer[index_start_for_strip];
 											glBegin(GL_TRIANGLE_STRIP);
-                                            printf("position: ");
 											for (unsigned int j = 0; j < points_per_strip; j++)
 											{
 												current_position = &(position_buffer[*indices * position_values_per_vertex]);
 												glVertex3fv(current_position);
-    printf("%.2f - ", current_position);
 
 												indices++;
 											}
-    printf("\n");
                                             glEnd();
 										}
 									} break;
@@ -3122,8 +3117,6 @@ int drawGLSurfaces(gtObject *object, Render_graphics_opengl *renderer,
 												strip_start+i, 1, &index_start_for_strip);
 											array->get_unsigned_integer_attribute(GRAPHICS_VERTEX_ARRAY_ATTRIBUTE_TYPE_NUMBER_OF_POINTS_FOR_STRIP,
 												strip_start+i, 1, &points_per_strip);
-    printf("vertex array triangle strip\n");
-    printf("points_per_strip: %d\n", points_per_strip);
                                             if (object->index_vertex_buffer_object)
 											{
 												glDrawElements(mode, points_per_strip, GL_UNSIGNED_INT, BUFFER_OFFSET(sizeof(GLuint) * index_start_for_strip));
