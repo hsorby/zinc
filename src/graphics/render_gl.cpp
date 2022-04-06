@@ -2882,6 +2882,8 @@ int drawGLSurfaces(gtObject *object, Render_graphics_opengl *renderer,
 		struct Graphics_vertex_array *array = object->vertex_array;
 		if (vb_surface)
 		{
+    printf("vertex buffer surface\n");
+
 			GLenum mode = g_TRIANGLE;
 			switch (vb_surface->surface_type)
 			{
@@ -2902,6 +2904,7 @@ int drawGLSurfaces(gtObject *object, Render_graphics_opengl *renderer,
 					mode = GL_TRIANGLE_STRIP;
 				}
 				*/
+    printf("triangle strip\n");
 				mode = GL_TRIANGLE_STRIP;
 			} break;
 			case g_SH_DISCONTINUOUS:
@@ -2909,7 +2912,8 @@ int drawGLSurfaces(gtObject *object, Render_graphics_opengl *renderer,
 			case g_SH_DISCONTINUOUS_TEXMAP:
 			case g_SH_DISCONTINUOUS_STRIP_TEXMAP:
 			{
-				mode = GL_TRIANGLES;
+    printf("triangles\n");
+                mode = GL_TRIANGLES;
 			} break;
 			default:
 			{
@@ -2931,6 +2935,8 @@ int drawGLSurfaces(gtObject *object, Render_graphics_opengl *renderer,
 			unsigned int surface_count =
 				array->get_number_of_vertices(
 					GRAPHICS_VERTEX_ARRAY_ATTRIBUTE_TYPE_ELEMENT_INDEX_START);
+        printf("surface count %d\n", surface_count);
+
 			GLfloat *position_buffer = 0, *data_buffer = 0, *normal_buffer = 0,
 				*texture_coordinate0_buffer = 0, *tangent_buffer = 0;
 			unsigned int position_values_per_vertex, position_vertex_count,
@@ -2985,7 +2991,8 @@ int drawGLSurfaces(gtObject *object, Render_graphics_opengl *renderer,
 			} break;
 			case GRAPHICS_OBJECT_RENDERING_TYPE_VERTEX_BUFFER_OBJECT:
 			{
-				Graphics_object_enable_opengl_vertex_buffer_object(
+    printf("enable vertex buffer object\n");
+                Graphics_object_enable_opengl_vertex_buffer_object(
 					object, renderer);
 			} break;
 			}
