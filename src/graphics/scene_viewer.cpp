@@ -6132,6 +6132,7 @@ graphics window on screen.
 
 	if (scene_viewer && width && height)
 	{
+    printf("forcing build of scene: %d, %d\n", width, height);
 		// force complete build of all graphics in scene for image output: not incremental
 		build_Scene(scene_viewer->scene, scene_viewer->filter);
 
